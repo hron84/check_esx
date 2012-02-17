@@ -32,11 +32,14 @@ Usage
 screen:
 
     Usage: check_esx [options]
-        -s, --server SERVER              ESX Server
-        -u, --user USER                  Username
-        -p, --password PASSWORD          Password
+        -s, --server SERVER              ESX Server or vCenter host
+        -u, --user USER                  Username for ESX/vCenter
+        -p, --password PASSWORD          Password for ESX/vCenter
+        -D, --datacenter DATACENTER      Datacenter name on vSphere
+        -C, --cluster CLUSTER            Cluster name on vSphere in datacenter
+        -N, --node NODE                  Node name or IP on vSphere in cluster
         -h, --help                       Displays this screen
-        -D, --datastore DATASTORE        Specify datastore to query
+        -S, --datastore DATASTORE        Specify datastore to query
         -m, --memory                     Display memory informations
         -w, --warning TRESHOLD           Percent of allocation to be warning
         -c, --critical TRESHOLD          Percent of allocation to be critical
@@ -48,18 +51,21 @@ exactly one of `--memory` or `--datastore`. You cannot specify both and you cann
 more than one datastore for monitoring.
 The `--debug` switch turns on some debugging informations.
 
+Connecting to vCenter server you need specify --datacenter, --cluster and --node switches.
+
 The tresholds must be specified in percents and you can suffix it with % character but it is
 not needed. So 80 and 80% are equivalents.
 
 Example usage
 
     check_esx -s 192.168.0.25 -u root -p s3cr3tP45sw0rd -m -w 80 -c 90
-    check_esx -s 192.168.0.25 -u root -p s3cr3tP45sw0rd -D datastore1 -w 75% -c 80%
+    check_esx -s 192.168.0.25 -u root -p s3cr3tP45sw0rd -S datastore1 -w 75% -c 80%
+    check_esx -s 192.168.0.25 -u administrator -p s3cr3tP45sw0rd -D DC1 -C cluster1 -N 10.10.10.1 -S datastore1 -w 75% -c 80%
 
 Known limitations/bugs
 ----------------------
 
- - Not tested with vSphere servers
+ - Cannot monitor vCenter systems where clusters/nodes organized to folders
 
 Planned features
 ----------------
