@@ -1,5 +1,10 @@
 #!/usr/bin/ruby
 
+# Copyright (C) 2012 Gabor Garami 
+# 
+# This program is licensed under the terms of Creative Commons BY-SA 3.0 license
+# To read the license, please visit http://creativecommons.org/licenses/by-sa/3.0/
+
 require 'rubygems'
 require 'libvirt'
 require 'optparse'
